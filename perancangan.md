@@ -1,10 +1,10 @@
-# PERANCANGAN SISTEM: CMS PROFIL SEKOLAH / COMPANY PROFILE
+# PERANCANGAN SISTEM: SCHOOL OF PEOPLE PEOPLE HAVE / COMPANY PROFILE
 **Milestone 1 (Pekan Ke-3): Perencanaan Menu & UI Wireframing**
 
 ---
 
 ## 1. Pendahuluan & Ringkasan Proyek
-Sistem ini merupakan Content Management System (CMS) terpadu untuk pengelolaan Website Profil Sekolah (atau Company Profile). CMS ini memfasilitasi administrator, staf pengajar/redaksi, dan humas sekolah untuk mengelola konten publik seperti berita, agenda kegiatan, galeri fasilitas, profil guru/staf, data prestasi siswa, serta manajemen pendaftaran/kontak (PPDB/Inquiry).
+Sistem ini merupakan platform manajemen konten terpadu untuk pengelolaan website profil sekolah dan informasi publik. Platform ini memfasilitasi administrator, staf pengajar/redaksi, dan humas sekolah dalam mengelola konten publik seperti berita, agenda kegiatan, galeri fasilitas, profil guru/staf, data prestasi siswa, serta manajemen pendaftaran/kontak (PPDB/Inquiry).
 
 ---
 
@@ -40,7 +40,7 @@ Sistem ini merupakan Content Management System (CMS) terpadu untuk pengelolaan W
 
 ---
 
-### B. Backend CMS (Admin Dashboard Panel)
+### B. Backend Admin (Dashboard Panel)
 ```
 Dashboard Admin
 ├── 1. Ringkasan & Analitik (Overview)
@@ -48,7 +48,7 @@ Dashboard Admin
 │   ├── Pendaftar Baru (PPDB) & Pesan Masuk
 │   └── Aktivitas Terkini (Audit Log)
 │
-├── 2. Manajemen Konten Publik (CMS Content)
+├── 2. Manajemen Konten Publik (Content Management)
 │   ├── Berita & Artikel (Daftar, Tulis Baru, Kategori, Tag)
 │   ├── Pengumuman Sekolah (Draft, Published, Pin ke Beranda)
 │   ├── Galeri Fasilitas & Dokumentasi Kegiatan (Media Manager)
@@ -231,4 +231,4 @@ erDiagram
 
 ## 5. Tautan Prototyping & Visualisasi
 - **Status Wireframe & UI Canvas**: Dirancang langsung pada workspace Google Stitch dengan layout Desktop responsif (Admin Dashboard Panel & Landing Page Preview).
-- **Figma Design System & Wireframe Link**: `https://www.figma.com/design/sample-project-sekolah-cms/Wireframe-Prototype-v1` *(Placeholder link proyek)*
+- **Figma Design System & Wireframe Link**: `https://www.figma.com/design/sample-project-sekolah-portal/Wireframe-Prototype-v1` *(Placeholder link proyek)*

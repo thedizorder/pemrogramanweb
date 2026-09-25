@@ -1,7 +1,7 @@
-# Perancangan CMS Profil Sekolah
+# Perancangan Profil Sekolah
 
 ## 1. Tujuan Proyek
-Sistem ini merupakan Content Management System untuk administrasi website profil sekolah. Tujuan utamanya adalah memudahkan pengelolaan konten publik, data guru/staf, kegiatan sekolah, dan proses penerimaan peserta didik baru (PPDB).
+Sistem ini merupakan platform administrasi website profil sekolah. Tujuan utamanya adalah memudahkan pengelolaan konten publik, data guru/staf, kegiatan sekolah, dan proses penerimaan peserta didik baru (PPDB).
 
 ## 2. Struktur Repository
 ```text

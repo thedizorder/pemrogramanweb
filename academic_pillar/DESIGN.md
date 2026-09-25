@@ -152,11 +152,11 @@ The type scale combines **Plus Jakarta Sans** for structural headers with **Inte
 
 - **Plus Jakarta Sans** offers clean geometric forms with slight warmth, softening administrative stiffness while maintaining institutional dignity. Used for page titles, modal headlines, metrics, and card titles.
 - **Inter** handles dense data tables, administrative inputs, form labels, and nested tree navigation. Tabular numbers (`tnum`) must be enabled globally for all data grids, financial totals, and student credit summaries.
-- Mobile scaling clamps headlines larger than 28px downward to preserve administrative vertical space and avoid multiline layout breakage in CMS toolbars.
+- Mobile scaling clamps headlines larger than 28px downward to preserve administrative vertical space and avoid multiline layout breakage in school admin toolbars.
 
 ## Layout & Spacing
 
-The layout is built on an adaptive multi-column fixed-fluid model tuned for CMS dashboards:
+The layout is built on an adaptive multi-column fixed-fluid model tuned for school admin dashboards:
 
 - **Desktop (1280px+)**: Dual-tier navigation layout. Fixed 260px primary navigation sidebar, dynamic master/detail work area, and 12-column content grid with 24px (`1.5rem`) gutters and 32px (`2rem`) outer boundaries.
 - **Tablet (768px - 1279px)**: Primary navigation collapses to an icon rail (64px width). Content grid adjusts to 8 columns with 20px gutters. Detail panes convert to full overlays or tabs.
@@ -174,7 +174,7 @@ This design system avoids heavy shadows, instead using **tonal layers and crisp 
 - **Borders**: Primary structural separation relies on a 1px solid stroke (`#E2E8F0`). Card boundaries, table cells, toolbar dividers, and header strips all use this perimeter rule.
 - **Base Canvas**: The foundational background rests at `#F8FAFC`. Elevated surfaces (content containers, data tables, modals) use `#FFFFFF`.
 - **Shadow Profile**: Where elevation is required (dropdowns, popovers, flyout drawers), apply a single subtle ambient shadow: `0 4px 12px -2px rgba(15, 23, 42, 0.06), 0 2px 4px -1px rgba(15, 23, 42, 0.04)`.
-- **Active / Drag States**: CMS reordering components (course modules, page tree reorganizers) elevate on pick-up using `0 10px 25px -5px rgba(30, 58, 138, 0.12)` alongside a 1px border colored `#2563EB`.
+- **Active / Drag States**: Reordering components (course modules, page tree reorganizers) elevate on pick-up using `0 10px 25px -5px rgba(30, 58, 138, 0.12)` alongside a 1px border colored `#2563EB`.
 
 ## Shapes
 
