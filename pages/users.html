@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manajemen Pengguna - School Of People People Have</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body class="dashboard-page">
+    <div class="dashboard-app">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">S</div>
+          <div>
+            <h2>School Of People People Have</h2>
+            <span>Admin Portal</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Sidebar navigation">
+          <button class="nav-item" type="button">Overview</button>
+          <button class="nav-item" type="button">Konten</button>
+          <button class="nav-item" type="button">Akademik</button>
+          <button class="nav-item active" type="button">Pengguna</button>
+          <button class="nav-item" type="button">Pengaturan</button>
+        </nav>
+
+        <div class="sidebar-card">
+          <p>Aktivitas bulan ini</p>
+          <strong>86%</strong>
+          <div class="progress-track"><span style="width:86%"></span></div>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="topbar-admin">
+          <div class="topbar-left">
+            <button class="sidebar-toggle" type="button" aria-label="Toggle sidebar">☰</button>
+            <div>
+              <p class="eyebrow">Akses & keamanan</p>
+              <h1 class="page-title">Manajemen Pengguna</h1>
+            </div>
+          </div>
+
+          <div class="topbar-right">
+            <label class="search-box" aria-label="Cari pengguna">
+              <span>⌕</span>
+              <input id="user-search" type="text" placeholder="Cari nama, role, atau email" />
+            </label>
+            <button id="open-user-modal" class="btn btn-primary" type="button">+ Tambah pengguna</button>
+          </div>
+        </header>
+
+        <section class="dashboard-stack">
+          <div class="analytics-grid">
+            <article class="metric-panel">
+              <span class="eyebrow">Total akun</span>
+              <h3>128</h3>
+              <small>+12 user baru bulan ini</small>
+            </article>
+            <article class="metric-panel accent-blue">
+              <span class="eyebrow">Admin</span>
+              <h3>08</h3>
+              <small>4 aktif hari ini</small>
+            </article>
+            <article class="metric-panel accent-green">
+              <span class="eyebrow">Guru</span>
+              <h3>48</h3>
+              <small>100% menggunakan akun sekolah</small>
+            </article>
+            <article class="metric-panel accent-gold">
+              <span class="eyebrow">Siswa</span>
+              <h3>1.240</h3>
+              <small>Dengan akses portal personal</small>
+            </article>
+          </div>
+
+          <section class="panel-card">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Kelola</p>
+                <h2>Daftar pengguna</h2>
+              </div>
+              <div class="tab-strip">
+                <button class="tab-chip active" type="button">Semua</button>
+                <button class="tab-chip" type="button">Admin</button>
+                <button class="tab-chip" type="button">Guru</button>
+                <button class="tab-chip" type="button">Siswa</button>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Pengguna</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Terakhir aktif</th>
+                  </tr>
+                </thead>
+                <tbody id="user-table-body"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

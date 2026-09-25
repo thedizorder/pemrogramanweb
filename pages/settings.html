@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pengaturan Sistem - School Of People People Have</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <div class="brand-mark">S</div>
+          <span>School Of People People Have</span>
+        </div>
+        <nav class="nav">
+          <a href="../index.html">Beranda</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="data-master.html">Data Master</a>
+          <a href="schedule.html">Jadwal</a>
+          <a href="settings.html" class="active">Pengaturan</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page-shell">
+      <section class="page-header">
+        <h1>Pengaturan Sistem</h1>
+        <p>Atur preferensi portal, keamanan akun, dan status operasional aplikasi sekolah secara terpusat.</p>
+      </section>
+
+      <section class="content-grid two-col">
+        <div class="panel-card">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Akses & keamanan</p>
+              <h2>Preferensi aplikasi</h2>
+            </div>
+          </div>
+
+          <div class="switch-list" data-settings-list>
+            <label class="switch-row">
+              <div>
+                <strong>Notifikasi email aktif</strong>
+              </div>
+              <input type="checkbox" data-setting-toggle="email" checked />
+            </label>
+
+            <label class="switch-row">
+              <div>
+                <strong>Verifikasi dua langkah</strong>
+              </div>
+              <input type="checkbox" data-setting-toggle="twoFactor" checked />
+            </label>
+
+            <label class="switch-row">
+              <div>
+                <strong>Publikasi otomatis konten</strong>
+              </div>
+              <input type="checkbox" data-setting-toggle="autoPublish" />
+            </label>
+
+            <label class="switch-row">
+              <div>
+                <strong>Mode maintenance portal</strong>
+              </div>
+              <input type="checkbox" data-setting-toggle="maintenance" />
+            </label>
+          </div>
+        </div>
+
+        <div class="panel-card">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Status operasional</p>
+              <h2>Ringkasan sistem</h2>
+            </div>
+          </div>
+
+          <ul class="check-list">
+            <li><strong>Server utama</strong><span>Online</span></li>
+            <li><strong>API PPDB</strong><span>Normal</span></li>
+            <li><strong>Backup harian</strong><span>Aktif</span></li>
+            <li><strong>Integrasi WhatsApp</strong><span>Terhubung</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel-card" style="margin-top: 22px;">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Manajemen akses</p>
+            <h2>Peran pengguna</h2>
+          </div>
+          <button class="ghost-btn" type="button">+ Tambah role</button>
+        </div>
+
+        <div class="table-wrap" style="margin-top: 18px;">
+          <table>
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Jumlah akun</th>
+                <th>Izin utama</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Super Admin</td>
+                <td>8</td>
+                <td>Semua akses</td>
+                <td><span class="badge success">Aktif</span></td>
+              </tr>
+              <tr>
+                <td>Admin Sekolah</td>
+                <td>12</td>
+                <td>Dashboard, data master</td>
+                <td><span class="badge primary">Tersedia</span></td>
+              </tr>
+              <tr>
+                <td>Guru</td>
+                <td>48</td>
+                <td>Jadwal, presensi</td>
+                <td><span class="badge success">Aktif</span></td>
+              </tr>
+              <tr>
+                <td>Wali Murid</td>
+                <td>1.240</td>
+                <td>Portal siswa</td>
+                <td><span class="badge warning">Review</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer container">
+      <span>© <span data-current-year></span> School Of People People Have Planning Repository</span>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

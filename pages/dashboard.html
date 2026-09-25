@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin - School Of People People Have</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body class="dashboard-page">
+    <div class="dashboard-app">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">S</div>
+          <div>
+            <h2>School Of People People Have</h2>
+            <span>Admin Portal</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Sidebar navigation">
+          <button class="nav-item active" type="button" data-target="overview" data-label="Overview Dashboard">
+            <span>◉</span>
+            <span>Overview</span>
+          </button>
+          <button class="nav-item" type="button" data-target="content" data-label="Manajemen Konten">
+            <span>▣</span>
+            <span>Konten</span>
+          </button>
+          <button class="nav-item" type="button" data-target="academic" data-label="Akademik & Sivitas">
+            <span>◫</span>
+            <span>Akademik</span>
+          </button>
+          <button class="nav-item" type="button" data-target="ppdb" data-label="PPDB & Verifikasi">
+            <span>◎</span>
+            <span>PPDB</span>
+          </button>
+          <button class="nav-item" type="button" data-target="settings" data-label="Pengaturan Sistem">
+            <span>⚙</span>
+            <span>Pengaturan</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-card">
+          <p>Progress bulan ini</p>
+          <strong>78%</strong>
+          <div class="progress-track"><span></span></div>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="topbar-admin">
+          <div class="topbar-left">
+            <button class="sidebar-toggle" type="button" aria-label="Toggle sidebar">☰</button>
+            <div>
+              <p class="eyebrow">Selamat pagi</p>
+              <h1 class="page-title">Overview Dashboard</h1>
+            </div>
+          </div>
+
+          <div class="topbar-right">
+            <label class="search-box" aria-label="Cari data">
+              <span>⌕</span>
+              <input type="text" placeholder="Cari data, user, atau konten" />
+            </label>
+            <button class="ghost-btn" type="button">+ Tambah</button>
+            <div class="user-chip">
+              <div class="avatar">AM</div>
+              <div>
+                <strong>Admin</strong>
+                <small>Super Admin</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="panel-section" data-section="overview">
+          <div class="kpi-grid">
+            <article class="kpi-card accent-blue">
+              <div class="kpi-header">
+                <span>PPDB Baru</span>
+                <span class="icon">👥</span>
+              </div>
+              <div class="kpi-body">
+                <strong>142</strong>
+                <small>+18% minggu ini</small>
+              </div>
+            </article>
+
+            <article class="kpi-card accent-gold">
+              <div class="kpi-header">
+                <span>Artikel</span>
+                <span class="icon">📝</span>
+              </div>
+              <div class="kpi-body">
+                <strong>86</strong>
+                <small>12 draft menunggu</small>
+              </div>
+            </article>
+
+            <article class="kpi-card accent-green">
+              <div class="kpi-header">
+                <span>Guru & Staf</span>
+                <span class="icon">🎓</span>
+              </div>
+              <div class="kpi-body">
+                <strong>48</strong>
+                <small>100% aktif</small>
+              </div>
+            </article>
+
+            <article class="kpi-card accent-purple">
+              <div class="kpi-header">
+                <span>Kunjungan</span>
+                <span class="icon">📈</span>
+              </div>
+              <div class="kpi-body">
+                <strong>28.4K</strong>
+                <small>+9,3% bulan ini</small>
+              </div>
+            </article>
+          </div>
+
+          <div class="content-grid two-col">
+            <section class="panel-card chart-panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Lalu lintas & PPDB</p>
+                  <h2>Performa mingguan</h2>
+                </div>
+                <div class="legend">
+                  <span><i class="dot blue"></i> Kunjungan</span>
+                  <span><i class="dot amber"></i> PPDB</span>
+                </div>
+              </div>
+
+              <div class="chart-bars" aria-label="Grafik performa">
+                <div class="bar-group"><span class="bar blue" style="height: 58%;"></span><span class="bar amber" style="height: 30%;"></span><small>Sen</small></div>
+                <div class="bar-group"><span class="bar blue" style="height: 74%;"></span><span class="bar amber" style="height: 44%;"></span><small>Sel</small></div>
+                <div class="bar-group"><span class="bar blue" style="height: 62%;"></span><span class="bar amber" style="height: 39%;"></span><small>Rab</small></div>
+                <div class="bar-group"><span class="bar blue" style="height: 90%;"></span><span class="bar amber" style="height: 66%;"></span><small>Kam</small></div>
+                <div class="bar-group"><span class="bar blue" style="height: 96%;"></span><span class="bar amber" style="height: 74%;"></span><small>Jum</small></div>
+                <div class="bar-group"><span class="bar blue" style="height: 83%;"></span><span class="bar amber" style="height: 52%;"></span><small>Sab</small></div>
+              </div>
+            </section>
+
+            <section class="panel-card activity-panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Aktivitas terbaru</p>
+                  <h2>Audit log</h2>
+                </div>
+              </div>
+
+              <ul class="activity-list">
+                <li>
+                  <span class="dot blue"></span>
+                  <div>
+                    <strong>Artikel baru diterbitkan</strong>
+                    <small>Prestasi siswa OSN - 12 menit lalu</small>
+                  </div>
+                </li>
+                <li>
+                  <span class="dot green"></span>
+                  <div>
+                    <strong>Verifikasi PPDB selesai</strong>
+                    <small>6 pendaftar masuk tahap lolos - 1 jam lalu</small>
+                  </div>
+                </li>
+                <li>
+                  <span class="dot amber"></span>
+                  <div>
+                    <strong>Data guru diperbarui</strong>
+                    <small>Rincian jadwal mengajar diperbaharui - 3 jam lalu</small>
+                  </div>
+                </li>
+              </ul>
+            </section>
+          </div>
+
+          <section class="panel-card table-panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Data terbaru</p>
+                <h2>Manajemen konten</h2>
+              </div>
+              <button class="ghost-btn" type="button">Lihat semua</button>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Judul</th>
+                    <th>Kategori</th>
+                    <th>Penulis</th>
+                    <th>Status</th>
+                    <th>Tanggal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Siswa SMA Raih Medali Emas OSN</td>
+                    <td>Prestasi</td>
+                    <td>Rina Wijaya</td>
+                    <td><span class="badge success">Published</span></td>
+                    <td>24 Okt 2024</td>
+                  </tr>
+                  <tr>
+                    <td>Pelatihan Literasi Digital Guru</td>
+                    <td>Akademik</td>
+                    <td>Ahmad Farisi</td>
+                    <td><span class="badge warning">Draft</span></td>
+                    <td>22 Okt 2024</td>
+                  </tr>
+                  <tr>
+                    <td>Jadwal Pendaftaran PPDB Gelombang 2</td>
+                    <td>Informasi</td>
+                    <td>Admin</td>
+                    <td><span class="badge primary">Aktif</span></td>
+                    <td>18 Okt 2024</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section class="panel-section hidden" data-section="content">
+          <div class="dashboard-stack">
+            <div class="panel-card wide-panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Konten</p>
+                  <h2>Manajemen berita & artikel</h2>
+                </div>
+                <button class="ghost-btn" type="button">+ Buat artikel</button>
+              </div>
+              <div class="feature-grid">
+                <article class="feature-card">
+                  <span class="tiny-badge success">Published</span>
+                  <h3>74</h3>
+                  <p>Artikel aktif terpublikasi</p>
+                </article>
+                <article class="feature-card">
+                  <span class="tiny-badge warning">Draft</span>
+                  <h3>12</h3>
+                  <p>Konten menunggu final review</p>
+                </article>
+                <article class="feature-card">
+                  <span class="tiny-badge primary">Review</span>
+                  <h3>3</h3>
+                  <p>Artikel butuh persetujuan</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Agenda editorial</p>
+                  <h2>Penjadwalan konten</h2>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Judul</th>
+                      <th>Kategori</th>
+                      <th>Jadwal</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Launching Kampus Merdeka</td>
+                      <td>Informasi</td>
+                      <td>28 Okt 2024</td>
+                      <td><span class="badge primary">Ready</span></td>
+                    </tr>
+                    <tr>
+                      <td>Program Magang Industri</td>
+                      <td>Akademik</td>
+                      <td>30 Okt 2024</td>
+                      <td><span class="badge warning">Draft</span></td>
+                    </tr>
+                    <tr>
+                      <td>Prestasi Olimpiade Matemika</td>
+                      <td>Prestasi</td>
+                      <td>01 Nov 2024</td>
+                      <td><span class="badge success">Published</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-section hidden" data-section="academic">
+          <div class="dashboard-stack">
+            <div class="panel-card wide-panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Akademik</p>
+                  <h2>Data pendidik & siswa</h2>
+                </div>
+              </div>
+              <div class="feature-grid">
+                <article class="feature-card">
+                  <span class="tiny-badge primary">Guru</span>
+                  <h3>48</h3>
+                  <p>Tenaga pendidik aktif</p>
+                </article>
+                <article class="feature-card">
+                  <span class="tiny-badge success">Siswa</span>
+                  <h3>1.240</h3>
+                  <p>Jumlah siswa terdaftar</p>
+                </article>
+                <article class="feature-card">
+                  <span class="tiny-badge warning">Unggulan</span>
+                  <h3>26</h3>
+                  <p>Program unggulan sekolah</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Kinerja</p>
+                  <h2>Catatan pembelajaran</h2>
+                </div>
+              </div>
+              <ul class="check-list">
+                <li><strong>Rapor semester</strong><span>98% terkumpul</span></li>
+                <li><strong>Absensi harian</strong><span>96,4%</span></li>
+                <li><strong>Ekstrakurikuler</strong><span>21 aktif</span></li>
+                <li><strong>Ujian nasional</strong><span>Target 92%</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-section hidden" data-section="ppdb">
+          <div class="dashboard-stack">
+            <div class="panel-card wide-panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">PPDB</p>
+                  <h2>Verifikasi pendaftar</h2>
+                </div>
+              </div>
+              <div class="feature-grid">
+                <article class="feature-card">
+                  <span class="tiny-badge primary">Aktif</span>
+                  <h3>142</h3>
+                  <p>Pendaftar aktif</p>
+                </article>
+                <article class="feature-card">
+                  <span class="tiny-badge warning">Tunggu</span>
+                  <h3>28</h3>
+                  <p>Menunggu verifikasi</p>
+                </article>
+                <article class="feature-card">
+                  <span class="tiny-badge success">Lengkap</span>
+                  <h3>64</h3>
+                  <p>Berkas lengkap</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Pipeline</p>
+                  <h2>Progress penerimaan</h2>
+                </div>
+              </div>
+              <ul class="check-list">
+                <li><strong>Pengajuan baru</strong><span>24</span></li>
+                <li><strong>Sudah screening</strong><span>41</span></li>
+                <li><strong>Jalur prestasi</strong><span>17</span></li>
+                <li><strong>Jalur zonasi</strong><span>31</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-section hidden" data-section="settings">
+          <div class="dashboard-stack">
+            <div class="panel-card wide-panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Pengaturan</p>
+                  <h2>Konfigurasi sistem</h2>
+                </div>
+              </div>
+              <div class="feature-grid">
+                <article class="feature-card">
+                  <span class="tiny-badge primary">Akses</span>
+                  <h3>08</h3>
+                  <p>Pengguna aktif</p>
+                </article>
+                <article class="feature-card">
+                  <span class="tiny-badge warning">Role</span>
+                  <h3>03</h3>
+                  <p>Role akses tersedia</p>
+                </article>
+                <article class="feature-card">
+                  <span class="tiny-badge success">Uptime</span>
+                  <h3>99.9%</h3>
+                  <p>Keandalan sistem</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Operasional</p>
+                  <h2>Pengaturan aplikasi</h2>
+                </div>
+              </div>
+              <div class="switch-list">
+                <div class="switch-row">
+                  <span>Auto publish berita</span>
+                  <input type="checkbox" checked />
+                </div>
+                <div class="switch-row">
+                  <span>Notifikasi PPDB</span>
+                  <input type="checkbox" checked />
+                </div>
+                <div class="switch-row">
+                  <span>Backup otomatis</span>
+                  <input type="checkbox" checked />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

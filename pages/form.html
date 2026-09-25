@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Input - School Of People People Have</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <div class="brand-mark">S</div>
+          <span>School Of People People Have</span>
+        </div>
+        <nav class="nav">
+          <a href="../index.html">Beranda</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="data-master.html">Data Master</a>
+          <a href="form.html">Form</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page-shell">
+      <section class="page-header">
+        <h1>Form Pendaftaran & Input Data</h1>
+        <p>Formulir untuk pendaftaran calon siswa baru dan pengelolaan data sekolah.</p>
+      </section>
+
+      <section class="card">
+        <form>
+          <div class="form-grid">
+            <div class="field">
+              <label for="nama">Nama Lengkap</label>
+              <input id="nama" type="text" placeholder="Masukkan nama lengkap" />
+            </div>
+
+            <div class="field">
+              <label for="nisn">NISN</label>
+              <input id="nisn" type="text" placeholder="Contoh: 0078921443" />
+            </div>
+
+            <div class="field">
+              <label for="asal">Asal Sekolah</label>
+              <input id="asal" type="text" placeholder="Nama sekolah asal" />
+            </div>
+
+            <div class="field">
+              <label for="jalur">Jalur Pendaftaran</label>
+              <select id="jalur">
+                <option>Reguler</option>
+                <option>Prestasi</option>
+                <option>Afirmasi</option>
+                <option>Zonasi</option>
+              </select>
+            </div>
+
+            <div class="field" style="grid-column: 1 / -1;">
+              <label for="catatan">Catatan Verifikasi</label>
+              <textarea id="catatan" placeholder="Tuliskan catatan atau riwayat verifikasi..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit">Simpan Data</button>
+            <button class="btn btn-secondary" type="button" style="color: var(--primary); background: var(--primary-soft); border: 1px solid #dfe9ff;">Reset Form</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer container">
+      <span>© <span data-current-year></span> School Of People People Have Planning Repository</span>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

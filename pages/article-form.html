@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah/Edit Artikel - School Of People People Have</title>
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+  </head>
+  <body class="dashboard-page">
+    <div class="dashboard-app">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">S</div>
+          <div>
+            <h2>School Of People People Have</h2>
+            <span>Admin Portal</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Sidebar navigation">
+          <button class="nav-item" type="button">Overview</button>
+          <button class="nav-item active" type="button">Konten</button>
+          <button class="nav-item" type="button">Akademik</button>
+          <button class="nav-item" type="button">PPDB</button>
+          <button class="nav-item" type="button">Pengaturan</button>
+        </nav>
+
+        <div class="sidebar-card">
+          <p>Progress bulan ini</p>
+          <strong>78%</strong>
+          <div class="progress-track"><span></span></div>
+        </div>
+      </aside>
+
+      <main class="admin-main">
+        <header class="topbar-admin">
+          <div class="topbar-left">
+            <button class="sidebar-toggle" type="button" aria-label="Toggle sidebar">☰</button>
+            <div>
+              <p class="eyebrow">Editorial</p>
+              <h1 class="page-title">Tambah / Edit Artikel</h1>
+            </div>
+          </div>
+
+          <div class="topbar-right">
+            <button class="ghost-btn" type="button">Pratinjau</button>
+            <button class="btn btn-primary" type="button">Publikasikan</button>
+          </div>
+        </header>
+
+        <section class="panel-section">
+          <div class="content-grid two-col article-layout">
+            <section class="panel-card">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Konten</p>
+                  <h2>Informasi artikel</h2>
+                </div>
+              </div>
+
+              <form class="article-form">
+                <div class="field">
+                  <label for="article-title">Judul artikel</label>
+                  <input id="article-title" type="text" value="Siswa SMA Raih Medali Emas OSN Fisika Nasional 2025" />
+                </div>
+
+                <div class="field">
+                  <label for="article-slug">Slug</label>
+                  <input id="article-slug" type="text" value="siswa-sma-raih-medali-emas-osn-fisika-nasional-2025" />
+                </div>
+
+                <div class="field-row two">
+                  <div class="field">
+                    <label for="category">Kategori</label>
+                    <select id="category">
+                      <option selected>Prestasi</option>
+                      <option>Akademik</option>
+                      <option>Kegiatan Sekolah</option>
+                      <option>Informasi</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="status">Status</label>
+                    <select id="status">
+                      <option selected>Published</option>
+                      <option>Draft</option>
+                      <option>Scheduled</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="field-row two">
+                  <div class="field">
+                    <label for="author">Penulis</label>
+                    <input id="author" type="text" value="Rina Wijaya" />
+                  </div>
+
+                  <div class="field">
+                    <label for="date">Tanggal</label>
+                    <input id="date" type="date" value="2024-10-24" />
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="cover">URL Cover</label>
+                  <input id="cover" type="url" value="https://images.unsplash.com/..." />
+                </div>
+
+                <div class="field">
+                  <label for="excerpt">Ringkasan</label>
+                  <textarea id="excerpt">Prestasi membanggakan dari cabang sains tingkat nasional menjadi bukti komitmen sekolah dalam memaksimalkan potensi siswa.</textarea>
+                </div>
+
+                <div class="field">
+                  <label for="content">Konten utama</label>
+                  <textarea id="content" class="content-editor">Siswa SMA Teladan berhasil meraih medali emas pada Olimpiade Sains Nasional bidang Fisika 2025. Keberhasilan ini menjadi bentuk nyata dari pembelajaran berbasis riset, dukungan guru, dan semangat belajar yang tinggi.</textarea>
+                </div>
+              </form>
+            </section>
+
+            <aside class="panel-card side-panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Preview</p>
+                  <h2>Pratinjau</h2>
+                </div>
+              </div>
+
+              <div class="preview-card">
+                <div class="preview-image"></div>
+                <div class="preview-meta">
+                  <span class="status-badge primary">Prestasi</span>
+                  <span class="meta-date">24 Okt 2024</span>
+                </div>
+                <h3>Siswa SMA Raih Medali Emas OSN Fisika Nasional 2025</h3>
+                <p>Prestasi membanggakan dari cabang sains tingkat nasional menjadi bukti hasil pembelajaran yang unggul dan konsisten.</p>
+              </div>
+
+              <div class="tag-box">
+                <span>#prestasi</span>
+                <span>#osn</span>
+                <span>#sma</span>
+                <span>#fisika</span>
+              </div>
+
+              <div class="action-stack">
+                <button class="btn btn-primary" type="button">Simpan perubahan</button>
+                <button class="ghost-btn" type="button">Simpan sebagai draft</button>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>
