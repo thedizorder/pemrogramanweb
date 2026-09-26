@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Auto-pushing to GitHub..."
+git push origin HEAD
+exit $?
