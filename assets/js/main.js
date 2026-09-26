@@ -1,11 +1,12 @@
 const STORAGE_KEY = 'schoolAppState_v1';
+const ADMIN_SESSION_KEY = 'schoolAdminSession_v1';
 
 const defaultState = {
   users: [
-    { name: 'Rina Wijaya', role: 'Admin', email: 'rina@schoolofpeople.com', status: 'Aktif', lastActive: '2 menit lalu' },
-    { name: 'Ahmad Farisi', role: 'Guru', email: 'ahmad.farisi@schoolofpeople.com', status: 'Online', lastActive: '12 menit lalu' },
-    { name: 'Nurul Anisa', role: 'Siswa', email: 'nurul.a@schoolofpeople.com', status: 'Review', lastActive: '1 jam lalu' },
-    { name: 'Yoga Pratama', role: 'Orang tua', email: 'yoga.pratama@yahoo.com', status: 'Aktif', lastActive: '3 jam lalu' }
+    { name: 'Rina Wijaya', role: 'Admin', email: 'rina@schoolofpeople.com', password: 'admin123', status: 'Aktif', lastActive: '2 menit lalu' },
+    { name: 'Ahmad Farisi', role: 'Guru', email: 'ahmad.farisi@schoolofpeople.com', password: 'guru123', status: 'Online', lastActive: '12 menit lalu' },
+    { name: 'Nurul Anisa', role: 'Siswa', email: 'nurul.a@schoolofpeople.com', password: 'siswa123', status: 'Review', lastActive: '1 jam lalu' },
+    { name: 'Yoga Pratama', role: 'Orang tua', email: 'yoga.pratama@yahoo.com', password: 'ortu123', status: 'Aktif', lastActive: '3 jam lalu' }
   ],
   settings: {
     email: true,
@@ -26,6 +27,197 @@ function getState() {
 
 function saveState(nextState) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(nextState));
+}
+
+function getAdminSession() {
+  try {
+    const raw = localStorage.getItem(ADMIN_SESSION_KEY);
+    const session = raw ? JSON.parse(raw) : null;
+    return session && session.name && session.email ? session : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function setAdminSession(session) {
+  localStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify(session));
+}
+
+function clearAdminSession() {
+  localStorage.removeItem(ADMIN_SESSION_KEY);
+}
+
+function getUserByCredentials(email, password) {
+  const normalizedEmail = (email || '').trim().toLowerCase();
+  const normalizedPassword = (password || '').trim();
+  const state = getState();
+
+  return state.users.find((user) => {
+    const matchEmail = (user.email || '').trim().toLowerCase() === normalizedEmail;
+    const matchPassword = String(user.password || '') === normalizedPassword;
+    return matchEmail && matchPassword;
+  }) || null;
+}
+
+function renderTopbarUserChip(session = getAdminSession()) {
+  const chip = document.getElementById('topbar-user-chip');
+  if (!chip) return;
+
+  const validSession = session && session.name && session.email ? session : null;
+  const isLoggedIn = Boolean(validSession);
+
+  chip.classList.toggle('hidden', !isLoggedIn);
+  chip.setAttribute('aria-hidden', String(!isLoggedIn));
+
+  if (!isLoggedIn) {
+    chip.querySelector('.avatar') && (chip.querySelector('.avatar').textContent = 'AM');
+    chip.querySelector('strong') && (chip.querySelector('strong').textContent = 'Admin');
+    chip.querySelector('small') && (chip.querySelector('small').textContent = 'Super Admin');
+    return;
+  }
+
+  const avatar = chip.querySelector('.avatar');
+  const userName = chip.querySelector('strong');
+  const userRole = chip.querySelector('small');
+
+  if (avatar) {
+    const initials = (validSession.name || 'AM').split(' ').slice(0, 2).map((part) => part[0]).join('').substring(0, 2).toUpperCase() || 'AM';
+    avatar.textContent = initials;
+  }
+
+  if (userName) userName.textContent = validSession.name || 'Admin';
+  if (userRole) userRole.textContent = validSession.role || 'Super Admin';
+}
+
+function renderSidebarAuthState() {
+  const userState = document.getElementById('sidebar-auth-user');
+  const loginTrigger = document.getElementById('login-menu-trigger');
+  const loginLabel = document.getElementById('login-menu-label');
+  if (!userState || !loginTrigger || !loginLabel) return;
+
+  const session = getAdminSession();
+  const isLoggedIn = Boolean(session);
+  userState.classList.toggle('hidden', !isLoggedIn);
+  loginLabel.textContent = isLoggedIn ? (session?.name || 'Admin') : 'Login';
+
+  if (session && userState) {
+    const avatar = userState.querySelector('.avatar');
+    const userName = userState.querySelector('strong');
+    const userRole = userState.querySelector('small');
+    if (avatar) avatar.textContent = (session.name || 'AM').split(' ').slice(0, 2).map((part) => part[0]).join('').substring(0, 2).toUpperCase() || 'AM';
+    if (userName) userName.textContent = session.name || 'Admin';
+    if (userRole) userRole.textContent = session.role || 'Super Admin';
+  }
+
+  renderTopbarUserChip(session);
+}
+
+function createLoginModal() {
+  if (document.getElementById('login-modal')) return;
+
+  const modal = document.createElement('div');
+  modal.id = 'login-modal';
+  modal.className = 'login-modal-backdrop hidden';
+  modal.innerHTML = `
+    <div class="login-modal-card" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
+      <div class="login-modal-header">
+        <h3 id="login-modal-title">Masuk Admin</h3>
+        <button type="button" class="login-close" aria-label="Tutup login">✕</button>
+      </div>
+
+      <form class="login-modal-form" id="login-modal-form">
+        <label class="field">
+          <span>Email atau username</span>
+          <input id="modal-login-email" type="email" placeholder="admin@schoolofpeople.com" required />
+        </label>
+
+        <label class="field">
+          <span>Password</span>
+          <input id="modal-login-password" type="password" placeholder="••••••••" required />
+        </label>
+
+        <div class="login-modal-footer">
+          <label class="checkbox-inline">
+            <input type="checkbox" checked />
+            <span>Ingat saya</span>
+          </label>
+          <a href="#">Lupa password?</a>
+        </div>
+
+        <button class="btn btn-primary full" type="submit">Masuk</button>
+      </form>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  const closeButton = modal.querySelector('.login-close');
+  closeButton.addEventListener('click', () => modal.classList.add('hidden'));
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) modal.classList.add('hidden');
+  });
+
+  modal.querySelector('#login-modal-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const email = document.getElementById('modal-login-email').value.trim();
+    const password = document.getElementById('modal-login-password').value.trim();
+
+    if (!email || !password) {
+      showToast('Email dan password wajib diisi.', 'error');
+      return;
+    }
+
+    const matchedUser = getUserByCredentials(email, password);
+    if (!matchedUser) {
+      showToast('Email atau password salah. Coba akun lain.', 'error');
+      return;
+    }
+
+    setAdminSession({
+      name: matchedUser.name,
+      role: matchedUser.role,
+      email: matchedUser.email,
+      avatar: matchedUser.name.split(' ').slice(0, 2).map((part) => part[0]).join('').substring(0, 2).toUpperCase() || 'AM'
+    });
+
+    modal.classList.add('hidden');
+    renderSidebarAuthState();
+    showToast(`Login berhasil. Selamat datang, ${matchedUser.name.split(' ')[0]}.`, 'success');
+    document.getElementById('modal-login-password').value = '';
+  });
+}
+
+function handleSidebarLogin() {
+  const loginTrigger = document.getElementById('login-menu-trigger');
+  const modal = document.getElementById('login-modal');
+  if (!loginTrigger || !modal) return;
+
+  loginTrigger.addEventListener('click', () => {
+    const session = getAdminSession();
+    if (session) {
+      renderSidebarAuthState();
+      return;
+    }
+
+    modal.classList.remove('hidden');
+    const emailField = document.getElementById('modal-login-email');
+    if (emailField) emailField.focus();
+  });
+}
+
+function bindSidebarLogout() {
+  const logoutButton = document.getElementById('sidebar-logout-btn');
+  const adminLogoButton = document.querySelector('.admin-brand-button');
+
+  const performLogout = () => {
+    clearAdminSession();
+    renderSidebarAuthState();
+    showToast('Berhasil logout.', 'success');
+    window.location.href = 'login.html';
+  };
+
+  if (logoutButton) logoutButton.addEventListener('click', performLogout);
+  if (adminLogoButton) adminLogoButton.addEventListener('click', performLogout);
 }
 
 function createToastContainer() {
@@ -231,8 +423,9 @@ function bindGlobalAppFeatures() {
 
   if (sidebarToggle && sidebar) {
     sidebarToggle.addEventListener('click', () => {
-      const isHidden = sidebar.style.display === 'none';
-      sidebar.style.display = isHidden ? 'flex' : 'none';
+      const dashboardApp = document.querySelector('.dashboard-app');
+      if (!dashboardApp) return;
+      dashboardApp.classList.toggle('sidebar-collapsed');
     });
   }
 }
@@ -322,10 +515,35 @@ function initFormActions() {
 }
 
 function initLoginActions() {
-  const loginButton = document.querySelector('.auth-form .btn-primary');
-  if (!loginButton) return;
+  const loginForm = document.getElementById('login-form');
+  if (!loginForm) return;
 
-  loginButton.addEventListener('click', () => {
+  loginForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const emailInput = loginForm.querySelector('input[type="text"]');
+    const passwordInput = loginForm.querySelector('input[type="password"]');
+    const email = (emailInput?.value || '').trim();
+    const password = (passwordInput?.value || '').trim();
+
+    if (!email || !password) {
+      showToast('Email dan password wajib diisi.', 'error');
+      return;
+    }
+
+    const matchedUser = getUserByCredentials(email, password);
+    if (!matchedUser) {
+      showToast('Email atau password salah. Coba akun yang tersedia.', 'error');
+      return;
+    }
+
+    setAdminSession({
+      name: matchedUser.name,
+      role: matchedUser.role,
+      email: matchedUser.email,
+      avatar: matchedUser.name.split(' ').slice(0, 2).map((part) => part[0]).join('').substring(0, 2).toUpperCase() || 'AM'
+    });
+
     showToast('Login berhasil. Mengalihkan dashboard...', 'success');
     setTimeout(() => {
       window.location.href = 'dashboard.html';
@@ -334,7 +552,16 @@ function initLoginActions() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const currentSession = getAdminSession();
+  if (!currentSession) {
+    clearAdminSession();
+  }
+
   createToastContainer();
+  createLoginModal();
+  renderSidebarAuthState();
+  bindSidebarLogout();
+  handleSidebarLogin();
   bindGlobalAppFeatures();
   renderUserTable();
   createUserModal();

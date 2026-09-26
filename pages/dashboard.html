@@ -9,13 +9,13 @@
   <body class="dashboard-page">
     <div class="dashboard-app">
       <aside class="sidebar">
-        <div class="brand-block">
+        <button class="brand-block admin-brand-button" type="button" aria-label="Keluar dari admin">
           <div class="brand-mark">S</div>
-          <div>
+          <div class="brand-copy">
             <h2>School Of People People Have</h2>
             <span>Admin Portal</span>
           </div>
-        </div>
+        </button>
 
         <nav class="sidebar-nav" aria-label="Sidebar navigation">
           <button class="nav-item active" type="button" data-target="overview" data-label="Overview Dashboard">
@@ -38,7 +38,22 @@
             <span>⚙</span>
             <span>Pengaturan</span>
           </button>
+          <button class="nav-item login-menu-trigger" type="button" id="login-menu-trigger">
+            <span>⎋</span>
+            <span id="login-menu-label">Login</span>
+          </button>
         </nav>
+
+        <div class="sidebar-auth-panel auth-user-state hidden" id="sidebar-auth-user">
+          <div class="user-card-compact">
+            <div class="avatar">AM</div>
+            <div>
+              <strong>Admin</strong>
+              <small>Super Admin</small>
+            </div>
+          </div>
+          <button class="ghost-btn full" type="button" id="sidebar-logout-btn">Logout</button>
+        </div>
 
         <div class="sidebar-card">
           <p>Progress bulan ini</p>
@@ -63,7 +78,7 @@
               <input type="text" placeholder="Cari data, user, atau konten" />
             </label>
             <button class="ghost-btn" type="button">+ Tambah</button>
-            <div class="user-chip">
+            <div class="user-chip hidden" id="topbar-user-chip">
               <div class="avatar">AM</div>
               <div>
                 <strong>Admin</strong>
