@@ -558,6 +558,41 @@ function initLoginActions() {
   });
 }
 
+function initLoginMascots() {
+  const loginShell = document.querySelector('.login-shell');
+  if (!loginShell) return;
+
+  const mascots = loginShell.querySelectorAll('.cartoon');
+  if (!mascots.length) return;
+
+  const updateMascotLook = (event) => {
+    const shellRect = loginShell.getBoundingClientRect();
+    const pointerX = event.clientX;
+    const pointerY = event.clientY;
+
+    mascots.forEach((mascot) => {
+      const mascotRect = mascot.getBoundingClientRect();
+      const mascotCenterX = mascotRect.left + mascotRect.width / 2;
+      const mascotCenterY = mascotRect.top + mascotRect.height / 2;
+      const deltaX = ((pointerX - mascotCenterX) / 90) * 6;
+      const deltaY = ((pointerY - mascotCenterY) / 90) * 6;
+      const clampedX = Math.max(-10, Math.min(10, deltaX));
+      const clampedY = Math.max(-8, Math.min(8, deltaY));
+
+      mascot.style.setProperty('--look-x', `${clampedX}px`);
+      mascot.style.setProperty('--look-y', `${clampedY}px`);
+    });
+  };
+
+  loginShell.addEventListener('pointermove', updateMascotLook);
+  loginShell.addEventListener('pointerleave', () => {
+    mascots.forEach((mascot) => {
+      mascot.style.setProperty('--look-x', '0px');
+      mascot.style.setProperty('--look-y', '0px');
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const currentSession = getAdminSession();
   if (!currentSession) {
@@ -582,6 +617,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initArticlePreview();
   initFormActions();
   initLoginActions();
+  initLoginMascots();
 });
 
 function initUserFilters() {
