@@ -533,11 +533,6 @@ function initLoginActions() {
     const email = (emailInput?.value || '').trim();
     const password = (passwordInput?.value || '').trim();
 
-    const emailInput = loginForm.querySelector('input[type="text"]');
-    const passwordInput = loginForm.querySelector('input[type="password"]');
-    const email = (emailInput?.value || '').trim();
-    const password = (passwordInput?.value || '').trim();
-
     if (!email || !password) {
       showToast('Email dan password wajib diisi.', 'error');
       return;
