@@ -1,5 +1,6 @@
 const STORAGE_KEY = 'schoolAppState_v1';
 const ADMIN_SESSION_KEY = 'schoolAdminSession_v1';
+const REMEMBERED_LOGIN_KEY = 'schoolRememberedLogin_v1';
 
 const defaultState = {
   users: [
@@ -512,19 +513,45 @@ function initFormActions() {
   });
 }
 
+function getRememberedLogin() {
+  try {
+    return localStorage.getItem(REMEMBERED_LOGIN_KEY) || '';
+  } catch (error) {
+    return '';
+  }
+}
+
+function setRememberedLogin(email, shouldRemember) {
+  try {
+    if (shouldRemember && email) {
+      localStorage.setItem(REMEMBERED_LOGIN_KEY, email);
+      return;
+    }
+    localStorage.removeItem(REMEMBERED_LOGIN_KEY);
+  } catch (error) {
+    // no-op for privacy-restricted browsers
+  }
+}
+
 function initLoginActions() {
   const loginForm = document.getElementById('login-form');
   if (!loginForm) return;
 
-  const emailInput = loginForm.querySelector('input[type="text"]');
-  const passwordInput = loginForm.querySelector('input[type="password"]');
+  const emailInput = document.getElementById('login-email');
+  const passwordInput = document.getElementById('login-password');
+  const rememberInput = document.getElementById('remember-login');
 
-  if (emailInput && !emailInput.value.trim()) {
-    emailInput.value = 'rina@schoolofpeople.com';
+  const rememberedEmail = getRememberedLogin();
+  if (emailInput) {
+    emailInput.value = rememberedEmail || emailInput.value || 'rina@schoolofpeople.com';
   }
 
   if (passwordInput && !passwordInput.value.trim()) {
     passwordInput.value = 'admin123';
+  }
+
+  if (rememberInput) {
+    rememberInput.checked = Boolean(rememberedEmail);
   }
 
   loginForm.addEventListener('submit', (event) => {
@@ -532,6 +559,7 @@ function initLoginActions() {
 
     const email = (emailInput?.value || '').trim();
     const password = (passwordInput?.value || '').trim();
+    const shouldRemember = Boolean(rememberInput?.checked);
 
     if (!email || !password) {
       showToast('Email dan password wajib diisi.', 'error');
@@ -543,6 +571,8 @@ function initLoginActions() {
       showToast('Email atau password salah. Coba akun yang tersedia.', 'error');
       return;
     }
+
+    setRememberedLogin(email, shouldRemember);
 
     setAdminSession({
       name: matchedUser.name,
