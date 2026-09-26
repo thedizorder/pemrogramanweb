@@ -189,19 +189,17 @@ function createLoginModal() {
 
 function handleSidebarLogin() {
   const loginTrigger = document.getElementById('login-menu-trigger');
-  const modal = document.getElementById('login-modal');
-  if (!loginTrigger || !modal) return;
+  if (!loginTrigger) return;
 
-  loginTrigger.addEventListener('click', () => {
+  loginTrigger.addEventListener('click', (event) => {
     const session = getAdminSession();
     if (session) {
+      clearAdminSession();
       renderSidebarAuthState();
-      return;
     }
 
-    modal.classList.remove('hidden');
-    const emailField = document.getElementById('modal-login-email');
-    if (emailField) emailField.focus();
+    event.preventDefault();
+    window.location.assign('login.html');
   });
 }
 
@@ -518,8 +516,22 @@ function initLoginActions() {
   const loginForm = document.getElementById('login-form');
   if (!loginForm) return;
 
+  const emailInput = loginForm.querySelector('input[type="text"]');
+  const passwordInput = loginForm.querySelector('input[type="password"]');
+
+  if (emailInput && !emailInput.value.trim()) {
+    emailInput.value = 'rina@schoolofpeople.com';
+  }
+
+  if (passwordInput && !passwordInput.value.trim()) {
+    passwordInput.value = 'admin123';
+  }
+
   loginForm.addEventListener('submit', (event) => {
     event.preventDefault();
+
+    const email = (emailInput?.value || '').trim();
+    const password = (passwordInput?.value || '').trim();
 
     const emailInput = loginForm.querySelector('input[type="text"]');
     const passwordInput = loginForm.querySelector('input[type="password"]');
@@ -558,7 +570,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   createToastContainer();
-  createLoginModal();
+
+  if (document.getElementById('login-menu-trigger')) {
+    createLoginModal();
+  }
+
   renderSidebarAuthState();
   bindSidebarLogout();
   handleSidebarLogin();
