@@ -219,6 +219,37 @@ function bindSidebarLogout() {
   if (adminLogoButton) adminLogoButton.addEventListener('click', performLogout);
 }
 
+function initDashboardIdentity() {
+  const session = getAdminSession();
+  const pageTitle = document.querySelector('.page-title');
+  const greeting = document.querySelector('.topbar-left .eyebrow');
+  const brandButton = document.querySelector('.admin-brand-button');
+
+  if (!session) {
+    window.location.href = 'login.html';
+    return;
+  }
+
+  const hour = new Date().getHours();
+  const greetingText = hour < 11 ? 'Selamat pagi' : hour < 15 ? 'Selamat siang' : 'Selamat sore';
+  const firstName = (session.name || 'Admin').split(' ')[0];
+
+  if (greeting) {
+    greeting.textContent = `${greetingText}, ${firstName}`;
+  }
+
+  if (pageTitle) {
+    pageTitle.textContent = session.role === 'Admin' ? 'Overview Dashboard' : `${session.role} Dashboard`;
+  }
+
+  if (brandButton) {
+    const brandName = brandButton.querySelector('h2');
+    if (brandName) {
+      brandName.textContent = `${firstName} Workspace`;
+    }
+  }
+}
+
 function createToastContainer() {
   if (document.querySelector('.toast-container')) return;
   const container = document.createElement('div');
@@ -630,6 +661,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   createToastContainer();
+
+  if (document.body.classList.contains('dashboard-page')) {
+    initDashboardIdentity();
+  }
 
   if (document.getElementById('login-menu-trigger')) {
     createLoginModal();
