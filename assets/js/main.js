@@ -9,6 +9,11 @@ const defaultState = {
     { name: 'Nurul Anisa', role: 'Siswa', email: 'nurul.a@schoolofpeople.com', password: 'siswa123', status: 'Review', lastActive: '1 jam lalu' },
     { name: 'Yoga Pratama', role: 'Orang tua', email: 'yoga.pratama@yahoo.com', password: 'ortu123', status: 'Aktif', lastActive: '3 jam lalu' }
   ],
+  articles: [
+    { id: 'art-1', title: 'Siswa SMA Raih Medali Emas OSN', category: 'Prestasi', author: 'Rina Wijaya', status: 'Published', date: '2024-10-24', excerpt: 'Siswa SMA meraih medali emas dalam ajang Olimpiade Sains Nasional.' },
+    { id: 'art-2', title: 'Pelatihan Literasi Digital Guru', category: 'Akademik', author: 'Ahmad Farisi', status: 'Draft', date: '2024-10-22', excerpt: 'Pelatihan literasi digital untuk guru dan staf sekolah.' },
+    { id: 'art-3', title: 'Jadwal Pendaftaran PPDB Gelombang 2', category: 'Informasi', author: 'Admin', status: 'Aktif', date: '2024-10-18', excerpt: 'Informasi resmi jadwal PPDB gelombang 2 untuk calon siswa baru.' }
+  ],
   settings: {
     email: true,
     twoFactor: true,
@@ -20,7 +25,16 @@ const defaultState = {
 function getState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? { ...defaultState, ...JSON.parse(raw), settings: { ...defaultState.settings, ...(JSON.parse(raw)?.settings || {}) } } : defaultState;
+    if (!raw) return defaultState;
+
+    const parsed = JSON.parse(raw);
+    return {
+      ...defaultState,
+      ...parsed,
+      users: Array.isArray(parsed.users) ? parsed.users : defaultState.users,
+      articles: Array.isArray(parsed.articles) ? parsed.articles : defaultState.articles,
+      settings: { ...defaultState.settings, ...(parsed.settings || {}) }
+    };
   } catch (error) {
     return defaultState;
   }
@@ -315,6 +329,191 @@ function renderUserTable() {
   }
 }
 
+function renderContentManager() {
+  const section = document.querySelector('[data-section="content"]');
+  if (!section || section.querySelector('#content-crud-root')) return;
+
+  const state = getState();
+  const root = document.createElement('div');
+  root.id = 'content-crud-root';
+  root.className = 'content-crud';
+  root.innerHTML = `
+    <div class="panel-card wide-panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Manajemen konten</p>
+          <h2>Artikel & Berita</h2>
+        </div>
+        <button type="button" class="btn btn-primary" id="open-content-form">+ Tambah artikel</button>
+      </div>
+      <div class="content-crud-grid">
+        <div class="panel-card form-panel">
+          <h3>Form artikel</h3>
+          <form id="content-crud-form" class="crud-form">
+            <input type="hidden" id="article-id" />
+            <div class="field">
+              <label for="article-title">Judul</label>
+              <input id="article-title" type="text" placeholder="Masukkan judul artikel" required />
+            </div>
+            <div class="field">
+              <label for="article-category">Kategori</label>
+              <select id="article-category">
+                <option>Prestasi</option>
+                <option>Akademik</option>
+                <option>Informasi</option>
+                <option>Berita</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="article-author">Penulis</label>
+              <input id="article-author" type="text" placeholder="Nama penulis" required />
+            </div>
+            <div class="field">
+              <label for="article-status">Status</label>
+              <select id="article-status">
+                <option>Published</option>
+                <option>Draft</option>
+                <option>Aktif</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="article-date">Tanggal</label>
+              <input id="article-date" type="date" required />
+            </div>
+            <div class="field">
+              <label for="article-excerpt">Ringkasan</label>
+              <textarea id="article-excerpt" rows="4" placeholder="Tulis ringkasan singkat..." required></textarea>
+            </div>
+            <div class="crud-actions">
+              <button type="submit" class="btn btn-primary">Simpan</button>
+              <button type="button" class="ghost-btn" id="reset-content-form">Batal</button>
+            </div>
+          </form>
+        </div>
+        <div class="panel-card table-panel">
+          <h3>Daftar artikel</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Judul</th>
+                  <th>Kategori</th>
+                  <th>Penulis</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="content-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  section.appendChild(root);
+  renderContentTable();
+
+  const form = document.getElementById('content-crud-form');
+  const trigger = document.getElementById('open-content-form');
+  const reset = document.getElementById('reset-content-form');
+
+  trigger?.addEventListener('click', () => {
+    form.reset();
+    document.getElementById('article-id').value = '';
+    document.getElementById('article-status').value = 'Published';
+  });
+
+  reset?.addEventListener('click', () => {
+    form.reset();
+    document.getElementById('article-id').value = '';
+  });
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const nextState = getState();
+    const articleId = document.getElementById('article-id').value;
+    const payload = {
+      id: articleId || `art-${Date.now()}`,
+      title: document.getElementById('article-title').value.trim(),
+      category: document.getElementById('article-category').value,
+      author: document.getElementById('article-author').value.trim(),
+      status: document.getElementById('article-status').value,
+      date: document.getElementById('article-date').value || new Date().toISOString().slice(0, 10),
+      excerpt: document.getElementById('article-excerpt').value.trim()
+    };
+
+    if (!payload.title || !payload.author || !payload.excerpt) {
+      showToast('Judul, penulis, dan ringkasan wajib diisi.', 'error');
+      return;
+    }
+
+    const articleIndex = nextState.articles.findIndex((item) => item.id === payload.id);
+    if (articleIndex >= 0) {
+      nextState.articles[articleIndex] = payload;
+    } else {
+      nextState.articles.unshift(payload);
+    }
+
+    saveState(nextState);
+    renderContentTable();
+    form.reset();
+    document.getElementById('article-id').value = '';
+    showToast(articleIndex >= 0 ? 'Artikel berhasil diperbarui.' : 'Artikel baru berhasil ditambahkan.', 'success');
+  });
+}
+
+function renderContentTable() {
+  const tableBody = document.querySelector('#content-table-body');
+  if (!tableBody) return;
+
+  const state = getState();
+  tableBody.innerHTML = state.articles.map((article) => `
+    <tr>
+      <td>${article.title}</td>
+      <td>${article.category}</td>
+      <td>${article.author}</td>
+      <td><span class="badge ${getStatusClass(article.status)}">${article.status}</span></td>
+      <td>
+        <div class="row-actions">
+          <button type="button" class="ghost-btn small-btn" data-edit-article="${article.id}">Edit</button>
+          <button type="button" class="ghost-btn small-btn danger" data-delete-article="${article.id}">Hapus</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+
+  document.querySelectorAll('[data-edit-article]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const article = getState().articles.find((item) => item.id === button.dataset.editArticle);
+      if (!article) return;
+      document.getElementById('article-id').value = article.id;
+      document.getElementById('article-title').value = article.title;
+      document.getElementById('article-category').value = article.category;
+      document.getElementById('article-author').value = article.author;
+      document.getElementById('article-status').value = article.status;
+      document.getElementById('article-date').value = article.date;
+      document.getElementById('article-excerpt').value = article.excerpt;
+      document.getElementById('article-title').focus();
+    });
+  });
+
+  document.querySelectorAll('[data-delete-article]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const id = button.dataset.deleteArticle;
+      const nextState = getState();
+      const filtered = nextState.articles.filter((item) => item.id !== id);
+      if (!filtered.length && nextState.articles.length === 0) {
+        saveState({ ...nextState, articles: [] });
+      } else {
+        saveState({ ...nextState, articles: filtered });
+      }
+      renderContentTable();
+      showToast('Artikel berhasil dihapus.', 'success');
+    });
+  });
+}
+
 function createUserModal() {
   if (document.querySelector('#user-modal')) return;
 
@@ -437,16 +636,27 @@ function bindGlobalAppFeatures() {
   const sidebar = document.querySelector('.sidebar');
   const sidebarToggle = document.querySelector('.sidebar-toggle');
 
+  const setActiveSection = (targetName, newLabel) => {
+    sidebarItems.forEach((nav) => {
+      const isActive = nav.dataset.target === targetName;
+      nav.classList.toggle('active', isActive);
+      nav.setAttribute('aria-current', isActive ? 'page' : 'false');
+    });
+
+    panelSections.forEach((section) => {
+      const isVisible = section.dataset.section === targetName;
+      section.classList.toggle('hidden', !isVisible);
+    });
+
+    if (pageTitle && newLabel) pageTitle.textContent = newLabel;
+  };
+
   if (sidebarItems.length && panelSections.length) {
     sidebarItems.forEach((item) => {
       item.addEventListener('click', () => {
-        const target = item.dataset.target;
-        sidebarItems.forEach((nav) => nav.classList.toggle('active', nav === item));
-        panelSections.forEach((section) => {
-          const isVisible = section.dataset.section === target;
-          section.classList.toggle('hidden', !isVisible);
-        });
-        if (pageTitle && item.dataset.label) pageTitle.textContent = item.dataset.label;
+        if (item.dataset.target) {
+          setActiveSection(item.dataset.target, item.dataset.label || item.textContent.trim());
+        }
       });
     });
   }
@@ -675,6 +885,7 @@ document.addEventListener('DOMContentLoaded', () => {
   handleSidebarLogin();
   bindGlobalAppFeatures();
   renderUserTable();
+  renderContentManager();
   createUserModal();
   bindUserModal();
   renderSettings();

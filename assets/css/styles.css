@@ -697,6 +697,77 @@ th {
   font-weight: 600;
 }
 
+.ghost-btn.danger {
+  border-color: rgba(220, 38, 38, 0.25);
+  color: #b91c1c;
+}
+
+.small-btn {
+  padding: 7px 10px;
+  font-size: 0.82rem;
+}
+
+.content-crud {
+  margin-top: 22px;
+}
+
+.content-crud-grid {
+  display: grid;
+  grid-template-columns: 420px minmax(0, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.form-panel,
+.table-panel {
+  padding: 20px;
+}
+
+.form-panel h3,
+.table-panel h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.crud-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.crud-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.crud-form input,
+.crud-form select,
+.crud-form textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #f8fbff;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.crud-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#content-table-body td {
+  vertical-align: middle;
+}
+
 .user-chip {
   display: flex;
   align-items: center;
